@@ -1,5 +1,7 @@
 package com.app.student_management_system.controller;
 
+import com.app.student_management_system.dto.StudentRequestDTO;
+import com.app.student_management_system.dto.StudentResponseDTO;
 import com.app.student_management_system.entity.Student;
 import com.app.student_management_system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +17,26 @@ public class StudentController {
 
     // CREATE
     @PostMapping
-    public Student createStudent(@RequestBody Student student){
-        return studentService.saveStudent(student);
+    public StudentResponseDTO createStudent(@RequestBody StudentRequestDTO dto){
+        return studentService.saveStudent(dto);
     }
 
     // READ ALL
     @GetMapping
-    public List<Student> getAllStudent(){
+    public List<StudentResponseDTO> getAllStudent(){
         return studentService.getAllStudents();
     }
 
     // READ BY ID
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id){
+    public StudentResponseDTO getStudentById(@PathVariable Long id){
         return studentService.getStudentById(id);
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent){
-        return studentService.updateStudent(id,updatedStudent);
+    public StudentResponseDTO updateStudent(@PathVariable Long id, @RequestBody StudentRequestDTO dto){
+        return studentService.updateStudent(id,dto);
     }
     //DELETE
     @DeleteMapping("/{id}")
@@ -45,7 +47,7 @@ public class StudentController {
 
     // SEARCH BY COURSE
     @GetMapping("/search")
-    public List<Student> getStudentsByCourse(@RequestParam String course){
+    public List<StudentResponseDTO> getStudentsByCourse(@RequestParam String course){
         return studentService.getStudentByCourse(course);
     }
 }
